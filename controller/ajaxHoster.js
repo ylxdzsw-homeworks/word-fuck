@@ -1,20 +1,18 @@
 var express = require('express');
 var consts = require('../constants');
 var debug = require('../debug');
-var db_file = require('../model/file');
-var db_user = require('../model/user');
+var db_word = require('../model/word');
 var router = express.Router();
 
-router.post('/file/upload',function(req,res,next){
-	db_file.save(req.files,function(err,doc){
-		res.json({id:doc[0]._id});
-	});
-});
-
-router.post('/user/add', function(req,res,next){
-	console.log(req.body);
-	db_user.save(req.body,function(err,doc){
-		res.json({id:doc._id});
+router.post('/word/add',function(req,res){
+	db_word.save(req.body,function(err,doc){
+		if(!err){
+			debug.log("a new word \""+req.body.english+"\" was saved");
+			res.json({err:false});
+		}else{
+			debug.error("a error occurs when saving a new word \""+req.body.english+"\", error info: "+ err);
+			res.json({err:true});
+		}
 	});
 });
 

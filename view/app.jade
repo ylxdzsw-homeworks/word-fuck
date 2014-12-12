@@ -1,0 +1,19 @@
+doctype html
+html(lang="zh_CH")
+	head
+		meta(charset="UTF-8")
+		link(rel='stylesheet',type='text/css',href='/static/css/main.css')
+		script(src='/static/js/jquery.min.js')
+		script(src='/static/js/main.js')
+		title word-fuck
+	body
+		h3 add word
+		form(onsubmit="return false;")
+			label(for='add-english') english
+			input#add-english
+			label(for='add-POS') POS
+			input#add-POS
+			label(for='add-chinese') chinese
+			input#add-chinese
+			button#add-submit submit
+			button#add-reset.hidden(type='reset')
