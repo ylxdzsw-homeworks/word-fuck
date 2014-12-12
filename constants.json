@@ -1,0 +1,19 @@
+{
+	"app":{
+		"name": "word-fuck",
+		"log": "./debug.log",
+		"files": "./uploadedfiles/",
+		"secret": "whatthefuck"
+	},
+	"web":{
+		"port": 3000,
+		"local": true
+	},
+	"db":{
+		"url": "localhost:27017/word-fuck",
+		"host": "localhost",
+		"port": "27017",
+		"username": "word-fuck",
+		"password": "whatthefuck"
+	}
+}
