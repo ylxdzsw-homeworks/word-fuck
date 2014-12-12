@@ -2,13 +2,11 @@ var express = require('express');
 var debug = require('./debug');
 var consts = require('./constants');
 
-var path = require('path');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var serveStatic = require('serve-static');
-var multer = require('multer');
 var mongoStore = require('connect-mongo')(session);
 
 var pageRender = require('./controller/pageRender');
@@ -24,12 +22,6 @@ app.use(logger('dev'));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(multer({
-	dest: consts.app.files,
-	limits: {
-		fileSize: 1024*1024*32 //32MB maxmium
-	}
-}));
 app.use(cookieParser());
 app.use(session({
 	secret: consts.app.secret,

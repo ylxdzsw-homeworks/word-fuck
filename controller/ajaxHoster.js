@@ -16,4 +16,29 @@ router.post('/word/add',function(req,res){
 	});
 });
 
+router.post('/word/import',function(req,res){
+	x = require('../wordlist');
+	db_word.batchsave(x,function(x){
+		res.json({
+			err:!Boolean(x.length)
+		});
+	});
+});
+
+router.post('/word/clear',function(req,res){
+	db_word.clear(function(err){
+		res.json({
+			err:err
+		});
+	});
+});
+
+router.post('/word/index',function(req,res){
+	db_word.index(function(err){
+		res.json({
+			err:err
+		});
+	});
+});
+
 module.exports = router;
