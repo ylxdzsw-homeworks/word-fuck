@@ -82,4 +82,38 @@ $(function(){
 			.addClass('gray')
 			.text('wait please...');
 	});
+
+	$('#start-button').click(function(){
+		var n = $('#start-number').val();
+		if(!n || n<1){
+			$('#start-notifier')
+				.removeClass('gray green')
+				.addClass('red')
+				.text('not a valid number');
+			return;
+		}
+		$.post('/ajax/quiz/start',{
+			num:n
+		},function(res){
+			if(!res.err){
+				$('#start-quiz').addClass('hidden');
+				$('#start-notifier').text('');
+				$('#start-button').text('restart');
+			}else{
+				$('#start-notifier')
+					.removeClass('gray green')
+					.addClass('red')
+					.text('start quiz failed');
+			}
+		});
+		$('#start-notifier')
+			.removeClass('red green')
+			.addClass('gray')
+			.text('wait please...');
+	});
+
+	var quizButton1 = function(){};
+	var quizButton2 = function(){};
+
+
 });

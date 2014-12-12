@@ -7,7 +7,7 @@ html(lang="zh_CH")
 		script(src='/static/js/main.js')
 		title word-fuck
 	body
-		div
+		div#add-word
 			h3 add word
 			form(onsubmit="return false;")
 				label(for='add-english') english
@@ -19,15 +19,38 @@ html(lang="zh_CH")
 				button#add-submit submit
 				button#add-reset.hidden(type='reset')
 			div#add-notifier
-		div
+		div#import-words
 			h3 import words
 			button#import-button import
 			div#import-notifier
-		div 
+		div#clear-database
 			h3 clear database
 			button#clear-button clear
 			div#clear-notifier
-		div
+		div#rebuild-index
 			h3 rebuild index
 			button#index-button rebuild
 			div#index-notifier
+		div#start-quiz
+			h3 start quiz
+			form(onsubmit="return false;")
+				label(for="start-number") number
+				input#start-number
+				button#start-button start quiz
+			div#start-notifier
+		div#do-quiz.hidden
+			h3 do quiz
+			form(onsubmit="return false;")
+				input#quiz-english
+			div#quiz-chinese
+			div#quiz-POS
+			div#quiz-remain
+			div#quiz-notifier
+			button#submit submit
+		div#quiz-result.hidden
+			h3 quiz result
+			div#result-right
+			div#result-wrong
+			div#result-total
+			div#result-ratio
+

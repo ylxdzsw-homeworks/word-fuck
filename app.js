@@ -29,10 +29,7 @@ app.use(session({
 		db: "word-fuck"
 	},function(){
 		debug.log("Session store has connected to MongoDB");
-	}),
-	cookie: {
-		maxAge:86400000
-	}
+	})
 }));
 
 app.use(function(req,res,next){

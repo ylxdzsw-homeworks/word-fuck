@@ -2,6 +2,7 @@ var express = require('express');
 var consts = require('../constants');
 var debug = require('../debug');
 var db_word = require('../model/word');
+var db_quiz = require('../model/quiz');
 var router = express.Router();
 
 router.post('/word/add',function(req,res){
@@ -40,5 +41,16 @@ router.post('/word/index',function(req,res){
 		});
 	});
 });
+
+//==========^^^*word*^^^=====vvv*quiz*vvv==============
+
+router.post('/quiz/start',function(req,res){
+	db_quiz.start(req.session,req.body.num,function(err){
+		res.json({
+			err:err
+		});
+	});
+});
+
 
 module.exports = router;

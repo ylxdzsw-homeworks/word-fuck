@@ -4,8 +4,27 @@ var monk = require('monk');
 var db = monk(consts.db.url);
 
 var save = function(word,callback){
+	word.rand = Math.random();
+	word.english = word.english.trim();
 	db.get('word').insert(word,function(err,doc){
 		callback(err,doc);
+	});
+};
+
+var randomload = function(callback){
+	var r = Math.random();
+	db.get('word').findOne({
+		rand:{$gte:r}
+	},function(err,doc){
+		if(!doc){
+			db.get('word').findOne({
+				rand:{$lte:r}
+			},function(err,doc){
+				callback(doc);
+			});
+		}else{
+			callback(doc);
+		}
 	});
 };
 
@@ -40,11 +59,13 @@ var clear = function(callback){
 };
 
 var index = function(callback){
-	db.get('word').index('english',callback);
-}
+	db.get('word').index('rand',callback);
+};
+
 module.exports = {
 	save:save,
 	batchsave:batchsave,
 	clear:clear,
-	index:index
+	index:index,
+	randomload:randomload
 };
