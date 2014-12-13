@@ -124,7 +124,6 @@ $(function(){
 			return;
 		}
 		$.post('/ajax/quiz/do',{english:x},function(res){
-			alert('once');
 			if(!res.err){
 				$('#quiz-notifier')
 					.removeClass('gray red')
@@ -136,10 +135,17 @@ $(function(){
 					.addClass('red')
 					.text('key: '+res.err);
 			}
-			$('#quiz-submit')
-				.text('next')
-				.off('click')
-				.click(quizButton2);
+			if(res.done){
+				$('#quiz-submit')
+					.text('result')
+					.off('click')
+					.click(quizButton2);
+			}else{
+				$('#quiz-submit')
+					.text('next')
+					.off('click')
+					.click(quizButton2);
+			}
 		});
 		$('#quiz-notifier')
 			.removeClass('red green')
@@ -149,6 +155,17 @@ $(function(){
 	var quizButton2 = function(){
 		$.post('/ajax/quiz/next',{},function(res){
 			if(!res.err){
+				if(!res.remain){
+					$('#quiz-submit').off('click');
+					$('#do-quiz').addClass('hidden');
+					$('#quiz-result').removeClass('hidden');
+					$('#result-right').text(res.right);
+					$('#result-wrong').text(res.wrong);
+					$('#result-total').text(res.total);
+					$('#result-ratio').text(res.ratio);
+
+					return;
+				}
 				$('#quiz-notifier').text('');
 				$('#quiz-english').val('');
 				$('#quiz-POS').text(res.POS);

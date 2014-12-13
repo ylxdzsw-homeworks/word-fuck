@@ -55,15 +55,27 @@ router.post('/quiz/start',function(req,res){
 router.post('/quiz/do',function(req,res){
 	db_quiz.doquiz(req.session,req.body.english,function(err){
 		res.json({
-			err:err
+			err:err,
+			done:!req.session.remain
 		});
 	});
 });
 
 router.post('/quiz/next',function(req,res){
-	db_quiz.next(req.session,function(doc){
-		doc.err = false;
-		res.json(doc);
-	});
+	if(req.session.remain){
+		db_quiz.next(req.session,function(doc){
+			doc.err = false;
+			res.json(doc);
+		});
+	}else{
+		res.json({
+			err:false,
+			remain:0,
+			right:req.session.right,
+			wrong:req.session.wrong,
+			total:req.session.total,
+			ratio:Math.floor(10000*req.session.right/req.session.total)/100 + '%'
+		});
+	}
 });
 module.exports = router;
