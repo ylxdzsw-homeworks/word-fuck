@@ -97,6 +97,8 @@ $(function(){
 		},function(res){
 			if(!res.err){
 				$('#start-quiz').addClass('hidden');
+				$('#do-quiz').removeClass('hidden');
+				quizButton2();
 				$('#start-notifier').text('');
 				$('#start-button').text('restart');
 			}else{
@@ -112,8 +114,61 @@ $(function(){
 			.text('wait please...');
 	});
 
-	var quizButton1 = function(){};
-	var quizButton2 = function(){};
-
+	var quizButton1 = function(){
+		var x = $('#quiz-english').val().trim();
+		if(!x){
+			$('#quiz-notifier')
+				.removeClass('gray green')
+				.addClass('red')
+				.text('it seems that you have not typed a word');
+			return;
+		}
+		$.post('/ajax/quiz/do',{english:x},function(res){
+			alert('once');
+			if(!res.err){
+				$('#quiz-notifier')
+					.removeClass('gray red')
+					.addClass('green')
+					.text('your answer is right!');
+			}else{
+				$('#quiz-notifier')
+					.removeClass('gray green')
+					.addClass('red')
+					.text('key: '+res.err);
+			}
+			$('#quiz-submit')
+				.text('next')
+				.off('click')
+				.click(quizButton2);
+		});
+		$('#quiz-notifier')
+			.removeClass('red green')
+			.addClass('gray')
+			.text('wait please...');
+	};
+	var quizButton2 = function(){
+		$.post('/ajax/quiz/next',{},function(res){
+			if(!res.err){
+				$('#quiz-notifier').text('');
+				$('#quiz-english').val('');
+				$('#quiz-POS').text(res.POS);
+				$('#quiz-chinese').text(res.chinese);
+				$('#quiz-remain').text(res.remain);
+				$('#quiz-submit')
+					.text('submit')
+					.off('click')
+					.click(quizButton1);
+			}else{
+				$('#quiz-notifier')
+					.removeClass('gray green')
+					.addClass('red')
+					.text('some error occurs');
+			}
+		});
+		$('#quiz-notifier')
+			.removeClass('red green')
+			.addClass('gray')
+			.text('wait please...');
+	};
 
 });

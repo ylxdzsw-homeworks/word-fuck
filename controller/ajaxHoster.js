@@ -52,5 +52,18 @@ router.post('/quiz/start',function(req,res){
 	});
 });
 
+router.post('/quiz/do',function(req,res){
+	db_quiz.doquiz(req.session,req.body.english,function(err){
+		res.json({
+			err:err
+		});
+	});
+});
 
+router.post('/quiz/next',function(req,res){
+	db_quiz.next(req.session,function(doc){
+		doc.err = false;
+		res.json(doc);
+	});
+});
 module.exports = router;

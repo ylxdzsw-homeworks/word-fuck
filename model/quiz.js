@@ -4,7 +4,7 @@ var db_word = require('./word');
 
 var start = function(session,number,callback){
 	session.total = number;
-	session.remains = number;
+	session.remain = number;
 	session.right = 0;
 	session.wrong = 0;
 	session.key = '';
@@ -16,19 +16,20 @@ var next = function(session,callback){
 		session.key = doc.english;
 		callback({
 			POS: doc.POS,
-			chinese: doc.chinese
+			chinese: doc.chinese,
+			remain: session.remain
 		});
 	});
 };
 
 var doquiz = function(session,answer,callback){
-	session.remains -= 1;
+	session.remain -= 1;
 	if(session.key === answer.trim()){
 		session.right += 1;
-		callback(true);
+		callback(false);
 	}else{
 		session.wrong += 1;
-		callback(false);
+		callback(session.key);
 	}
 };
 
