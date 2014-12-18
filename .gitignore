@@ -8,6 +8,5 @@ uploadedfiles
 *.RData
 *.html
 *.htm
-*.doc
 *.docx
 *.pdf
