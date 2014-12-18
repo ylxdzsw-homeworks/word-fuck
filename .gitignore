@@ -3,3 +3,11 @@ node_modules
 *.bak
 *.log
 uploadedfiles
+*.Rmd
+*.Rhistory
+*.RData
+*.html
+*.htm
+*.doc
+*.docx
+*.pdf
