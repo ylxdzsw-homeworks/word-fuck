@@ -28,6 +28,11 @@ router.post('/word/import',function(req,res){
 
 router.post('/word/clear',function(req,res){
 	db_word.clear(function(err){
+		if(!err){
+			debug.info("Database cleared");
+		}else{
+			debug.warning("Database clearing failed");
+		}
 		res.json({
 			err:err
 		});
@@ -36,6 +41,11 @@ router.post('/word/clear',function(req,res){
 
 router.post('/word/index',function(req,res){
 	db_word.index(function(err){
+		if(!err){
+			debug.info("Index built succesfully");
+		}else{
+			debug.warning("Building index failed");
+		}
 		res.json({
 			err:err
 		});
