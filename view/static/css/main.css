@@ -14,57 +14,42 @@
 	color: green
 }
 
-#cube-warp {
-	perspective: 800px;
-	perspective-origin: 50% 100px;
+#tri-warp {
+	-webkit-perspective: 500px;
+	-webkit-perspective-origin: 50% 75%;
 }
 
-#cube-cube {
+#tri-tri {
 	position: relative;
-	width: 200px;
+	width: 300px;
+	height: 600px;
 	transform-style: preserve-3d;
+	transform: rotateY(0);
+	transition: 2s;
 }
 
-#cube-cube div {
+#tri-tri>div {
 	position: absolute;
-	width: 200px;
-	height: 200px;
+	width: 100%;
+	height: 100%;
+	backface-visibility:hidden;
+}
+#tri-right {
+	transform: rotateY(120deg) translateZ(86px);
+}
+#tri-left {
+	transform: rotateY(-120deg) translateZ(86px);
+}
+#tri-front {
+	transform: translateZ(86px);
 }
 
-#cube-back {
-	background-color: red;
-	transform: translateZ(-100px) rotateY(180deg);
+#tri-tri.front {
+	transform: rotateY(0deg);
 }
-#cube-right {
-	background-color: blue;
-	transform: rotateY(-270deg) translateX(100px);
-	transform-origin: top right;
+#tri-tri.left {
+	transform: rotateY(120deg);
 }
-#cube-left {
-	background-color: green;
-	transform: rotateY(270deg) translateX(-100px);
-	transform-origin: center left;
-}
-#cube-top {
-	background-color: yellow;
-	transform: rotateX(-90deg) translateY(-100px);
-	transform-origin: top center;
-}
-#cube-bottom {
-	background-color: purple;
-	transform: rotateX(90deg) translateY(100px);
-	transform-origin: bottom center;
-}
-#cube-front {
-	background-color: orange;
-	transform: translateZ(100px);
-}
-
-@keyframes spin {
-	from { transform: rotateY(0); }
-	to { transform: rotateY(360deg); }
-}
-
-#cube-cube {
-	animation: spin 5s infinite linear;
+#tri-tri.right {
+	transform: rotateY(-120deg);
 }

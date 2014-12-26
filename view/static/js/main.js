@@ -1,4 +1,33 @@
 $(function(){
+
+	var tri = {
+		left: function(){
+			$('#tri-tri')
+				.removeClass('front right')
+				.addClass('left');
+		},
+		front: function(){
+			$('#tri-tri')
+				.removeClass('left right')
+				.addClass('front');
+		},
+		right: function(){
+			$('#tri-tri')
+				.removeClass('front left')
+				.addClass('right');
+		},
+	};
+
+	$('#toleft').click(function(){
+		tri.left();
+	});
+	$('#toright').click(function(){
+		tri.right();
+	});
+	$('#tofront').click(function(){
+		tri.front();
+	});
+
 	$('#add-submit').click(function(){
 		var a = $('#add-english').val();
 		var b = $('#add-POS').val();
