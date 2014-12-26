@@ -7,59 +7,60 @@ html(lang="zh_CH")
 		script(src='/static/js/main.js')
 		title word-fuck
 	body
-		button#toleft left
-		button#tofront front
-		button#toright right
-
-
+		button#toleft 管理
+		button#tofront 添加
+		button#toright 自测
 		#tri-warp
 			#tri-tri
-				#tri-front front
+				#tri-front
 					div
 						div#add-word
-							h3 add word
+							h3 添加单词
 							form(onsubmit="return false;")
-								label(for='add-english') english
+								label(for='add-english') 英文拼写
 								input#add-english
-								label(for='add-POS') POS
+								br
+								label(for='add-POS') 单词词性
 								input#add-POS
-								label(for='add-chinese') chinese
+								br
+								label(for='add-chinese') 汉语解释
 								input#add-chinese
-								button#add-submit submit
+								br
+								button#add-submit 添加
 								button#add-reset.hidden(type='reset')
 							div#add-notifier
 						div#import-words
-							h3 import words
-							button#import-button import
+							h3 批量导入
+							button#import-button 导入
 							div#import-notifier
-				#tri-left left
+				#tri-left
 					div#clear-database
-						h3 clear database
-						button#clear-button clear
+						h3 清空数据库
+						button#clear-button 清空
 						div#clear-notifier
 					div#rebuild-index
-						h3 rebuild index
-						button#index-button rebuild
+						h3 重建索引
+						button#index-button 建立
 						div#index-notifier
-				#tri-right right
+				#tri-right
 					div#start-quiz
-						h3 start quiz
+						h3 开始自测
 						form(onsubmit="return false;")
-							label(for="start-number") number
+							label(for="start-number") 自测词数
 							input#start-number
-							button#start-button start quiz
+							button#start-button 开始
 						div#start-notifier
 					div#do-quiz.hidden
-						h3 do quiz
+						h3 自测
 						form(onsubmit="return false;")
 							input#quiz-english
 						div#quiz-chinese
 						div#quiz-POS
 						div#quiz-remain
 						div#quiz-notifier
-						button#quiz-submit submit
+						button#quiz-submit 提交
 					div#quiz-result.hidden
-						h3 quiz result
+						h3 自测结果
 						div#result-right
 						div#result-wrong
 						div#result-total
