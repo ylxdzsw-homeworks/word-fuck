@@ -1,3 +1,10 @@
+/* 
+ * description: word fuck main loop
+ * author: ylxdzsw@gmail.com
+ * date: 2014.12.10
+ * lisence: MIT
+ */
+
 var express = require('express');
 var debug = require('./debug');
 var consts = require('./constants');

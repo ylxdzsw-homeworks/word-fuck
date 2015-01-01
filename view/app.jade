@@ -1,3 +1,8 @@
+//- description: word fuck main page
+	author: ylxdzsw@gmail.com
+	date: 2014.12.10
+	lisence: MIT
+
 doctype html
 html(lang="zh_CH")
 	head
@@ -7,6 +12,7 @@ html(lang="zh_CH")
 		script(src='/static/js/main.js')
 		title word-fuck
 	body
+		h1 单词自测辅助系统
 		button#toleft 管理
 		button#tofront 添加
 		button#toright 自测
@@ -61,7 +67,15 @@ html(lang="zh_CH")
 						button#quiz-submit 提交
 					div#quiz-result.hidden
 						h3 自测结果
-						div#result-right
-						div#result-wrong
-						div#result-total
-						div#result-ratio
+						div
+							|正确数：
+							span#result-right
+						div
+							|错误数：
+							span#result-wrong
+						div
+							|总数：
+							span#result-total
+						div
+							|正确率：
+							span#result-ratio

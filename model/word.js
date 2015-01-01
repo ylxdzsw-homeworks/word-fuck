@@ -1,3 +1,9 @@
+/* 
+ * description: word fuck words manager
+ * author: ylxdzsw@gmail.com
+ * date: 2014.12.10
+ * lisence: MIT
+ */
 var consts = require('../constants');
 var debug = require('../debug');
 var monk = require('monk');
@@ -20,10 +26,13 @@ var randomload = function(callback){
 			db.get('word').findOne({
 				rand:{$lte:r}
 			},function(err,doc){
-				callback(doc);
+				if(!doc){
+					err = err || "No words found in database"
+				}
+				callback(err,doc);
 			});
 		}else{
-			callback(doc);
+			callback(err,doc);
 		}
 	});
 };

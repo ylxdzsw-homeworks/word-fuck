@@ -1,3 +1,10 @@
+/* 
+ * description: word fuck main page js
+ * author: ylxdzsw@gmail.com
+ * date: 2014.12.10
+ * lisence: MIT
+ */
+
 $(function(){
 
 	var tri = {
@@ -32,8 +39,15 @@ $(function(){
 		var a = $('#add-english').val();
 		var b = $('#add-POS').val();
 		var c = $('#add-chinese').val();
+		if(!a.trim().length || !b.trim().length || !c.trim().length || /[^a-zA-Z]/.test(a.trim())){
+			$('#add-notifier')
+				.removeClass('gray green')
+				.addClass('red')
+				.text('word not valid');
+			return;
+		}
 		$.post('/ajax/word/add',{
-			english: a,
+			english: a.trim().toLowerCase(),
 			POS: b,
 			chinese: c
 		},function(res){
@@ -114,7 +128,7 @@ $(function(){
 
 	$('#start-button').click(function(){
 		var n = $('#start-number').val();
-		if(!n || n<1){
+		if(!n || Number.isNaN(Number(n)) || Number(n) < 1){
 			$('#start-notifier')
 				.removeClass('gray green')
 				.addClass('red')
@@ -208,7 +222,7 @@ $(function(){
 				$('#quiz-notifier')
 					.removeClass('gray green')
 					.addClass('red')
-					.text('some error occurs');
+					.text(res.err || 'some error occurs');
 			}
 		});
 		$('#quiz-notifier')

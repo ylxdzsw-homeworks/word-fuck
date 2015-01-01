@@ -1,3 +1,9 @@
+/* 
+ * description: word fuck quiz manager
+ * author: ylxdzsw@gmail.com
+ * date: 2014.12.10
+ * lisence: MIT
+ */
 var consts = require('../constants');
 var debug = require('../debug');
 var db_word = require('./word');
@@ -12,13 +18,17 @@ var start = function(session,number,callback){
 }
 
 var next = function(session,callback){
-	db_word.randomload(function(doc){
-		session.key = doc.english;
-		callback({
-			POS: doc.POS,
-			chinese: doc.chinese,
-			remain: session.remain
-		});
+	db_word.randomload(function(err,doc){
+		if(err){
+			callback(err)
+		}else{
+			session.key = doc.english;
+			callback(false,{
+				POS: doc.POS,
+				chinese: doc.chinese,
+				remain: session.remain
+			});
+		}
 	});
 };
 

@@ -1,3 +1,9 @@
+/* 
+ * description: word fuck ajax hoster
+ * author: ylxdzsw@gmail.com
+ * date: 2014.12.10
+ * lisence: MIT
+ */
 var express = require('express');
 var consts = require('../constants');
 var debug = require('../debug');
@@ -31,7 +37,7 @@ router.post('/word/clear',function(req,res){
 		if(!err){
 			debug.info("Database cleared");
 		}else{
-			debug.warning("Database clearing failed");
+			debug.warn("Database clearing failed");
 		}
 		res.json({
 			err:err
@@ -55,11 +61,17 @@ router.post('/word/index',function(req,res){
 //==========^^^*word*^^^=====vvv*quiz*vvv==============
 
 router.post('/quiz/start',function(req,res){
-	db_quiz.start(req.session,req.body.num,function(err){
+	if(Number.isNaN(Number(req.body.num)) || Number(req.body.num) < 1 || Number(req.body.num) != Math.floor(Number(req.body.num))){
 		res.json({
-			err:err
+			err:"not a integer"
 		});
-	});
+	}else{
+		db_quiz.start(req.session,Number(req.body.num),function(err){
+			res.json({
+				err:err
+			});
+		});
+	}
 });
 
 router.post('/quiz/do',function(req,res){
@@ -73,8 +85,9 @@ router.post('/quiz/do',function(req,res){
 
 router.post('/quiz/next',function(req,res){
 	if(req.session.remain){
-		db_quiz.next(req.session,function(doc){
-			doc.err = false;
+		db_quiz.next(req.session,function(err,doc){
+			doc = doc || {};
+			doc.err = err;
 			res.json(doc);
 		});
 	}else{
