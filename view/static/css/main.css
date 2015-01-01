@@ -15,12 +15,15 @@
 }
 
 body {
+	margin: 10px auto;
 	width:300px;
 }
 
 #tri-warp {
-	-webkit-perspective: 500px;
-	-webkit-perspective-origin: 50% 75%;
+	/*
+	-webkit-perspective: 400px;
+	-webkit-perspective-origin: 50% 25%;
+	*/
 }
 
 #tri-tri {
