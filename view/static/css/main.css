@@ -18,7 +18,12 @@
 }
 
 .green {
-	color: green
+	color: lime;
+}
+
+html {
+	background-color: black;
+	color: white;
 }
 
 body {
